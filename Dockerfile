@@ -6,7 +6,12 @@ RUN url=$(curl -s "https://api.github.com/repos/concourse/concourse/releases/lat
     | jq -r '.assets[] | select(.name | test("fly.*linux.*amd64.tgz$")) | .browser_download_url') && \
     curl -L "$url" -o /fly.tgz && tar -xvf /fly.tgz
 
+
 FROM alpine:edge
 RUN apk add --no-cache bash tzdata ca-certificates
 COPY --from=downloader /fly /usr/local/bin/fly
+
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.5.1/wait /wait
+RUN chmod +x /wait
+
 RUN chmod +x /usr/local/bin/fly
