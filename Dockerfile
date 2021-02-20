@@ -1,5 +1,5 @@
 FROM alpine:edge as downloader
-ARG CONCOURSE_VERSION=5.5.7
+ARG CONCOURSE_VERSION=7.0.0
 RUN apk add --no-cache curl
 RUN curl -L https://github.com/concourse/concourse/releases/download/v${CONCOURSE_VERSION}/fly-${CONCOURSE_VERSION}-linux-amd64.tgz -o /fly.tgz && tar -xvf /fly.tgz
 
